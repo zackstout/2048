@@ -36,19 +36,6 @@ function initializeGrid() {
       cell.drawBorders();
       grid.push(cell);
 
-      // if (i == 0 && j == 0) {
-      //   var taco = cell.start();
-      //   // console.log(taco);
-      //   // taco.forEach(function(s) {
-      //   //   var r = Math.floor(parseInt(s.spot) / 4);
-      //   //   var c = parseInt(s.spot) % 4;
-      //   //   text(s.value, r * w/4, c * h/4 + h/4);
-      //   // });
-      // }
-
-      // text(i + ''+ j, i * w/4 , j * h/4 + h/4);
-      // console.log(cell.start());
-
     }
   }
 }

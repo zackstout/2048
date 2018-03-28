@@ -24,12 +24,13 @@ class Cell {
     var c2 = ran2 % 4;
     // console.log(r1, r2, c1, c2);
 
-    // textAlign(CENTER, CENTER);
+    // Just delegate responsibility of drawing the text of the value to each cell object:
+    // textAlign(CENTER, CENTER);  <-- Not sure why this is messing up alignment.
     text(bool1, r1 * w/4, (c1 + 1) * h/4);
     text(bool2, r2 * w/4, (c2 + 1) * h/4);
 
-    grid[ran1] = bool1;
-    grid[ran2] = bool2;
+    grid[ran1].val = bool1;
+    grid[ran2].val = bool2;
   }
 
 
