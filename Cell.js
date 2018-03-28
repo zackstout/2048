@@ -8,13 +8,30 @@ class Cell {
 
   // Only called when the game starts:
   start() {
-    var out = [];
+    // Ok sure there's duplication here, I'm gonna skip over it:
     var ran1 = Math.floor(Math.random() * 15);
     var ran2 = Math.floor(Math.random() * 15);
-    out.push({spot: ran1, value: this.spawn() ? 2 : 4});
-    out.push({spot: ran2, value: this.spawn() ? 2 : 4});
-    return out;
+    // terrible fix, just check it again:
+    if (ran1 == ran2) {
+      ran2 = Math.floor(Math.random() * 15);
+    }
+    var bool1 = this.spawn() ? 2 : 4;
+    var bool2 = this.spawn() ? 2 : 4;
+
+    var r1 = Math.floor(ran1 / 4);
+    var r2 = Math.floor(ran2 / 4);
+    var c1 = ran1 % 4;
+    var c2 = ran2 % 4;
+    // console.log(r1, r2, c1, c2);
+
+    // textAlign(CENTER, CENTER);
+    text(bool1, r1 * w/4, (c1 + 1) * h/4);
+    text(bool2, r2 * w/4, (c2 + 1) * h/4);
+
+    grid[ran1] = bool1;
+    grid[ran2] = bool2;
   }
+
 
   // will it just know about w and h? Let's find out. Answer: yes.:
   drawBorders() {
