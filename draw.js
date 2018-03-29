@@ -15,8 +15,6 @@ So column is index % 4.
 And row is Math.floor(index / 4).
 */
 
-// var grid = [];
-
 var grid = new Grid();
 
 var w, h;
@@ -25,12 +23,9 @@ function setup() {
   createCanvas(400, 400);
   w = width;
   h = height;
-  // console.log(w, h);
   background(225);
 
   grid.initializeGrid();
-
-  // initializeGrid();
 
   startGame();
 

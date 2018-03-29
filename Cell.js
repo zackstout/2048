@@ -36,7 +36,6 @@ class Cell {
     grid.info[ran2].prevVal = bool2;
   }
 
-
   // will it just know about w and h? Let's find out. Answer: yes.:
   drawBorders() {
     var iPix = this.i * w/4;
@@ -46,8 +45,6 @@ class Cell {
     line(iPix, jPix + h/4, iPix + w/4, jPix + h/4);
     line(iPix + w/4, jPix, iPix + w/4, jPix + h/4);
   }
-
-
 
   spawn() {
     return Math.random() > 0.5;
