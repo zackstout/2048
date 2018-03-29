@@ -34,6 +34,7 @@ class Grid {
       // var nonZero = row.filter((c) => c.val > 0);
       var zeroCount = 0;
       var nonZero = [];
+
       row.forEach(cell => {
         if (cell.val == 0) {
           zeroCount++;
@@ -41,21 +42,34 @@ class Grid {
           nonZero.push(cell.val);
         }
       });
-      // console.log(nonZero);
+      console.log(nonZero);
+
+      nonZero.forEach((num, i) => {
+        if (num == nonZero[i + 1]) {
+          console.log('got one');
+          // set the one at i to 0, and i+1 to double:
+          // num = 0;
+          // nonZero[i + 1] = 2* num;
+
+          // Ok this *will* break it if we have more than 2 elements, because we're altering the array we're walking through:
+          nonZero = [num * 2].concat(nonZero.slice(i + 2));
+          zeroCount++;
+        }
+      });
 
       for (var i=0; i < zeroCount; i++) {
         nonZero.unshift(0);
       }
-      console.log(nonZero);
+      // console.log(nonZero);
 
       // had to be 4, not 3:
       for (var j=0; j < 4; j++) {
-        console.log(nonZero[j]);
         row[j].val = nonZero[j];
       }
 
-      console.log(row);
 
+
+      // console.log(row);
     });
 
 
