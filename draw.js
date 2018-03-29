@@ -28,25 +28,15 @@ function setup() {
   // console.log(w, h);
   background(225);
 
-  initializeGrid();
+  grid.initializeGrid();
+
+  // initializeGrid();
 
   startGame();
 
   console.log(grid);
 
 
-}
-
-// Initialize our array of cell-objects:s
-function initializeGrid() {
-  for (var i=0; i < 4; i++) {
-    for (var j=0; j < 4; j++) {
-      var cell = new Cell(i, j);
-      cell.drawBorders();
-      grid.info.push(cell);
-
-    }
-  }
 }
 
 function startGame() {

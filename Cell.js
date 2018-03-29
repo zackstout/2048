@@ -4,16 +4,17 @@ class Cell {
     this.i = i;
     this.j = j;
     this.val = 0;
+    this.prevVal = 0;
   }
 
   // Only called when the game starts:
   start() {
     // Ok sure there's duplication here, I'm gonna skip over it:
-    var ran1 = Math.floor(Math.random() * 15);
-    var ran2 = Math.floor(Math.random() * 15);
-    // terrible fix, just check it again:
+    var ran1 = Math.floor(Math.random() * 16);
+    var ran2 = Math.floor(Math.random() * 16);
+    // terrible fix, just check it again: -- won't catch every error case (because it might choose same spot):
     if (ran1 == ran2) {
-      ran2 = Math.floor(Math.random() * 15);
+      ran2 = Math.floor(Math.random() * 16);
     }
     var bool1 = this.spawn() ? 2 : 4;
     var bool2 = this.spawn() ? 2 : 4;
@@ -31,6 +32,8 @@ class Cell {
 
     grid.info[ran1].val = bool1;
     grid.info[ran2].val = bool2;
+    grid.info[ran1].prevVal = bool1;
+    grid.info[ran2].prevVal = bool2;
   }
 
 
