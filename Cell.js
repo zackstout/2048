@@ -29,8 +29,8 @@ class Cell {
     text(bool1, r1 * w/4, (c1 + 1) * h/4);
     text(bool2, r2 * w/4, (c2 + 1) * h/4);
 
-    grid[ran1].val = bool1;
-    grid[ran2].val = bool2;
+    grid.info[ran1].val = bool1;
+    grid.info[ran2].val = bool2;
   }
 
 
