@@ -4,17 +4,16 @@ class Grid {
     this.info = [];
   }
 
-
-    drawGrid() {
-      background(225);
-
-      this.info.forEach((cell) => {
-        cell.drawBorders();
-        if (cell.val > 0) {
-          text(cell.val, cell.i * w/4, (cell.j + 1) * h/4);
-        }
-      });
-    }
+  drawGrid() {
+    // clear out before re-drawing:
+    background(225);
+    this.info.forEach(cell => {
+      cell.drawBorders();
+      if (cell.val > 0) {
+        text(cell.val, cell.i * w/4, (cell.j + 1) * h/4);
+      }
+    });
+  }
 
   checkRows(direction) {
     // console.log('check');
@@ -29,6 +28,39 @@ class Grid {
     rows = [r1, r2, r3, r4];
 
     // console.log(r1, r2, r3, r4);
+
+    rows.forEach(row => {
+      // can't use this, unless we want to make new cells:
+      // var nonZero = row.filter((c) => c.val > 0);
+      var zeroCount = 0;
+      var nonZero = [];
+      row.forEach(cell => {
+        if (cell.val == 0) {
+          zeroCount++;
+        } else {
+          nonZero.push(cell.val);
+        }
+      });
+      // console.log(nonZero);
+
+      for (var i=0; i < zeroCount; i++) {
+        nonZero.unshift(0);
+      }
+      console.log(nonZero);
+
+      // had to be 4, not 3:
+      for (var j=0; j < 4; j++) {
+        console.log(nonZero[j]);
+        row[j].val = nonZero[j];
+      }
+
+      console.log(row);
+
+    });
+
+
+
+
 
     this.drawGrid();
 
