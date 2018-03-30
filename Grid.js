@@ -37,6 +37,27 @@ class Grid {
     }
   }
 
+  update(rows) {
+    rows.forEach(row => {
+      var nonZero = this.getNewArray(row);
+      // attempting to check if anything moves:
+      var numSame = 0;
+      // Update the cell's info:
+      for (var j=0; j < 4; j++) {
+        row[j].val = nonZero[j];
+
+        // check for sameness:
+        if (row[j].val == row[j].prevVal && row[j].val > 0) {
+          console.log('same');
+          numSame++;
+        }
+
+        row[j].prevVal = row[j].val;
+      }
+
+    }); // end forEach(row)
+  }
+
   getNewArray(row) {
     var zeroCount = 0;
     var nonZero = [];
@@ -68,6 +89,7 @@ class Grid {
 
 
   checkRows(direction) {
+    console.log(direction);
     // console.log('check');
     console.log(grid.info);
     var rows = [];
@@ -78,26 +100,19 @@ class Grid {
     var r2 = grid.info.slice(4, 8);
     var r3 = grid.info.slice(8, 12);
     var r4 = grid.info.slice(12, 16);
-    rows = [r1, r2, r3, r4];
 
-    rows.forEach(row => {
-      var nonZero = this.getNewArray(row);
-      // attempting to check if anything moves:
-      var numSame = 0;
-      // Update the cell's info:
-      for (var j=0; j < 4; j++) {
-        row[j].val = nonZero[j];
+    if (direction == 'down') {
+      rows = [r1, r2, r3, r4];
 
-        // check for sameness:
-        if (row[j].val == row[j].prevVal && row[j].val > 0) {
-          console.log('same');
-          numSame++;
-        }
+    } else {
+      // YES, this is it!
+      rows = [r1.reverse(), r2.reverse(), r3.reverse(), r4.reverse()];
 
-        row[j].prevVal = row[j].val;
-      }
+    }
 
-    }); // end forEach(row)
+    this.update(rows);
+
+
 
     // Only want to call this *IF SOMETHING MOVED*:
     this.spawnNew();

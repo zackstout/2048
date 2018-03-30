@@ -43,6 +43,11 @@ function keyReleased() {
     console.log('space');
     grid.checkRows('down');
   }
+
+  if (key == 'A') {
+    console.log('a');
+    grid.checkRows('up');
+  }
 }
 
 
