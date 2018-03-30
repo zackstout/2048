@@ -48,6 +48,14 @@ function keyReleased() {
     console.log('a');
     grid.checkRows('up');
   }
+
+  if (key == 'S') {
+    grid.checkRows('right');
+  }
+
+  if (key == 'D') {
+    grid.checkRows('left');
+  }
 }
 
 

@@ -93,19 +93,36 @@ class Grid {
     // console.log('check');
     console.log(grid.info);
     var rows = [];
+    var r1, r2, r3, r4;
 
     // start with assumption they are pressing 'down':
     // the irksome part is going to be thinking through the math for the other direction -- changing to Up should be straightforward.
-    var r1 = grid.info.slice(0, 4);
-    var r2 = grid.info.slice(4, 8);
-    var r3 = grid.info.slice(8, 12);
-    var r4 = grid.info.slice(12, 16);
+    var c1 = grid.info.slice(0, 4);
+    var c2 = grid.info.slice(4, 8);
+    var c3 = grid.info.slice(8, 12);
+    var c4 = grid.info.slice(12, 16);
+    r1 = [c1[0], c2[0], c3[0], c4[0]];
+    r2 = [c1[1], c2[1], c3[1], c4[1]];
+    r3 = [c1[2], c2[2], c3[2], c4[2]];
+    r4 = [c1[3], c2[3], c3[3], c4[3]];
 
     if (direction == 'down') {
+      rows = [c1, c2, c3, c4];
+
+    } else if (direction == 'up') {
+      // YES, this is it!
+      rows = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()];
+
+      //oh it wasn't that bad:
+      // well this isn't quite working:
+    } else if (direction == 'right') {
       rows = [r1, r2, r3, r4];
 
-    } else {
-      // YES, this is it!
+    } else if (direction == 'left') {
+      // r1 = [c1[0], c2[0], c3[0], c4[0]];
+      // r2 = [c1[1], c2[1], c3[1], c4[1]];
+      // r3 = [c1[2], c2[2], c3[2], c4[2]];
+      // r4 = [c1[3], c2[3], c3[3], c4[3]];
       rows = [r1.reverse(), r2.reverse(), r3.reverse(), r4.reverse()];
 
     }
