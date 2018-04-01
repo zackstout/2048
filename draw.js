@@ -30,30 +30,28 @@ function setup() {
   startGame();
 
   console.log(grid);
-
-
 }
 
 function startGame() {
   grid.info[0].start();
 }
 
+// Arrow keys (at least on my keyboard):
 function keyReleased() {
-  if (key == ' ') {
-    console.log('space');
+  // console.log(key);
+  if (key == '(') {
     grid.checkRows('down');
   }
 
-  if (key == 'A') {
-    console.log('a');
+  if (key == '&') {
     grid.checkRows('up');
   }
 
-  if (key == 'S') {
+  if (key == "'") {
     grid.checkRows('right');
   }
 
-  if (key == 'D') {
+  if (key == '%') {
     grid.checkRows('left');
   }
 }

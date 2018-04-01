@@ -91,9 +91,8 @@ class Grid {
   checkRows(direction) {
     console.log(direction);
     // console.log('check');
-    console.log(grid.info);
+    console.table(grid.info);
     var rows = [];
-    var r1, r2, r3, r4;
 
     // start with assumption they are pressing 'down':
     // the irksome part is going to be thinking through the math for the other direction -- changing to Up should be straightforward.
@@ -101,35 +100,31 @@ class Grid {
     var c2 = grid.info.slice(4, 8);
     var c3 = grid.info.slice(8, 12);
     var c4 = grid.info.slice(12, 16);
-    r1 = [c1[0], c2[0], c3[0], c4[0]];
-    r2 = [c1[1], c2[1], c3[1], c4[1]];
-    r3 = [c1[2], c2[2], c3[2], c4[2]];
-    r4 = [c1[3], c2[3], c3[3], c4[3]];
+    var r1 = [c1[0], c2[0], c3[0], c4[0]];
+    var r2 = [c1[1], c2[1], c3[1], c4[1]];
+    var r3 = [c1[2], c2[2], c3[2], c4[2]];
+    var r4 = [c1[3], c2[3], c3[3], c4[3]];
 
-    if (direction == 'down') {
+    switch(direction) {
+      case 'down':
       rows = [c1, c2, c3, c4];
+      break;
 
-    } else if (direction == 'up') {
+      case 'up':
       // YES, this is it!
       rows = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()];
+      break;
 
-      //oh it wasn't that bad:
-      // well this isn't quite working:
-    } else if (direction == 'right') {
+      case 'right':
       rows = [r1, r2, r3, r4];
+      break;
 
-    } else if (direction == 'left') {
-      // r1 = [c1[0], c2[0], c3[0], c4[0]];
-      // r2 = [c1[1], c2[1], c3[1], c4[1]];
-      // r3 = [c1[2], c2[2], c3[2], c4[2]];
-      // r4 = [c1[3], c2[3], c3[3], c4[3]];
+      case 'left':
       rows = [r1.reverse(), r2.reverse(), r3.reverse(), r4.reverse()];
-
+      break;
     }
 
     this.update(rows);
-
-
 
     // Only want to call this *IF SOMETHING MOVED*:
     this.spawnNew();
