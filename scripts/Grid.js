@@ -16,7 +16,7 @@ class Grid {
       }
     }
   }
-  
+
   // ================================================================================
   drawGrid() {
     // clear out before re-drawing:
@@ -24,7 +24,8 @@ class Grid {
     this.info.forEach(cell => {
       cell.drawBorders();
       if (cell.val > 0) {
-        text(cell.val, cell.i * w/4, (cell.j + 1) * h/4);
+        // Adding offsets:
+        text(cell.val, cell.i * w/4 + w/8, (cell.j + 1) * h/4 - h/8);
       }
     });
   }
@@ -42,6 +43,8 @@ class Grid {
 
   // ================================================================================
   update(rows) {
+    // console.log('rows are....', rows);
+
     rows.forEach(row => {
       var nonZero = this.getNewArray(row);
       // attempting to check if anything moves:
@@ -63,17 +66,26 @@ class Grid {
   }
 
   // ================================================================================
+  // The main game logic:
   getNewArray(row) {
+    console.log('row is: ', row);
+
     var zeroCount = 0;
-    var nonZero = [];
+    var nonZero = []; // the result to be returned
 
     row.forEach(cell => {
-      if (cell.val == 0) {
-        zeroCount++;
-      } else {
-        nonZero.push(cell.val);
-      }
+      if (cell.val > 0) nonZero.push(cell.val);
     });
+
+    zeroCount = 4 - nonZero.length;
+
+    // for (let i=0; i < nonZero.length; i++) {
+    //   const num = nonZero[i];
+    //   const next = nonZero[i + 1]; // what if i is last?
+    //   if (num == next) {
+    //
+    //   }
+    // }
 
     nonZero.forEach((num, i) => {
       if (num == nonZero[i + 1]) {
@@ -86,22 +98,18 @@ class Grid {
     });
 
     for (var i=0; i < zeroCount; i++) {
-      nonZero.unshift(0);
+      nonZero.unshift(0); // add to beginning
     }
 
     return nonZero;
-  } // end getNewArray
+  }
 
   // ================================================================================
   checkRows(direction) {
-    console.log(direction);
-    // console.log('check');
+    // console.table(grid.info); // Nice
+    var sel = [];
 
-    console.table(grid.info); // Nice
-    var rows = [];
-
-    // start with assumption they are pressing 'down':
-    // the irksome part is going to be thinking through the math for the other direction -- changing to Up should be straightforward.
+    // Get cols and rows:
     var c1 = grid.info.slice(0, 4);
     var c2 = grid.info.slice(4, 8);
     var c3 = grid.info.slice(8, 12);
@@ -111,28 +119,20 @@ class Grid {
     var r3 = [c1[2], c2[2], c3[2], c4[2]];
     var r4 = [c1[3], c2[3], c3[3], c4[3]];
 
+    // Get the proper selection:
+    // I think we may need to reverse these (i.e. swap where `reverse` is applied), because we need to check from *end* of selection:
+    // Either that, or change direction we walk through in the update (or, getNewArray) function.
     switch(direction) {
-      case 'down':
-      rows = [c1, c2, c3, c4];
-      break;
-
-      case 'up':
-      // YES, this is it!
-      rows = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()];
-      break;
-
-      case 'right':
-      rows = [r1, r2, r3, r4];
-      break;
-
-      case 'left':
-      rows = [r1.reverse(), r2.reverse(), r3.reverse(), r4.reverse()];
-      break;
+      case 'down': sel = [c1, c2, c3, c4]; break;
+      case 'up': sel = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()]; break;
+      case 'right': sel = [r1, r2, r3, r4]; break;
+      case 'left': sel = [r1.reverse(), r2.reverse(), r3.reverse(), r4.reverse()]; break;
     }
 
-    this.update(rows);
+    this.update(sel);
 
     // Only want to call this *IF SOMETHING MOVED*:
+    // But I guess if nothing moved.... You lost?
     this.spawnNew();
     this.drawGrid();
   }

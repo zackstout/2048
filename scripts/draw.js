@@ -16,8 +16,7 @@ And row is Math.floor(index / 4).
 */
 
 var grid = new Grid();
-
-var w, h;
+let w, h;
 
 // ================================================================================
 function setup() {
@@ -27,41 +26,16 @@ function setup() {
   background(225);
 
   grid.initializeGrid();
-
-  startGame();
-
-  console.log(grid);
-}
-
-// ================================================================================
-function startGame() {
   grid.info[0].start();
 }
 
 // ================================================================================
 // Arrow keys (at least on my keyboard):
 function keyReleased() {
-  // console.log(key);
-  if (key == '(') {
-    grid.checkRows('down');
-  }
-
-  if (key == '&') {
-    grid.checkRows('up');
-  }
-
-  if (key == "'") {
-    grid.checkRows('right');
-  }
-
-  if (key == '%') {
-    grid.checkRows('left');
+  switch(key) {
+    case '(': grid.checkRows('down'); break;
+    case '&': grid.checkRows('up'); break;
+    case "'": grid.checkRows('right'); break;
+    case '%': grid.checkRows('left'); break;
   }
 }
-
-
-// function draw() {
-//   if (keyIsPressed) {
-//     console.log(key);
-//   }
-// }
