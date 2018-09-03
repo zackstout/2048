@@ -5,6 +5,7 @@ class Grid {
     this.info = [];
   }
 
+  // ================================================================================
   // Initialize our array of cell objects:
   initializeGrid() {
     for (var i=0; i < 4; i++) {
@@ -15,7 +16,8 @@ class Grid {
       }
     }
   }
-
+  
+  // ================================================================================
   drawGrid() {
     // clear out before re-drawing:
     background(225);
@@ -27,6 +29,7 @@ class Grid {
     });
   }
 
+  // ================================================================================
   spawnNew() {
     var ran = Math.floor(Math.random() * 16);
     if (this.info[ran].val == 0) {
@@ -37,6 +40,7 @@ class Grid {
     }
   }
 
+  // ================================================================================
   update(rows) {
     rows.forEach(row => {
       var nonZero = this.getNewArray(row);
@@ -58,6 +62,7 @@ class Grid {
     }); // end forEach(row)
   }
 
+  // ================================================================================
   getNewArray(row) {
     var zeroCount = 0;
     var nonZero = [];
@@ -87,11 +92,12 @@ class Grid {
     return nonZero;
   } // end getNewArray
 
-
+  // ================================================================================
   checkRows(direction) {
     console.log(direction);
     // console.log('check');
-    console.table(grid.info);
+
+    console.table(grid.info); // Nice
     var rows = [];
 
     // start with assumption they are pressing 'down':

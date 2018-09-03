@@ -19,6 +19,7 @@ var grid = new Grid();
 
 var w, h;
 
+// ================================================================================
 function setup() {
   createCanvas(400, 400);
   w = width;
@@ -32,10 +33,12 @@ function setup() {
   console.log(grid);
 }
 
+// ================================================================================
 function startGame() {
   grid.info[0].start();
 }
 
+// ================================================================================
 // Arrow keys (at least on my keyboard):
 function keyReleased() {
   // console.log(key);
