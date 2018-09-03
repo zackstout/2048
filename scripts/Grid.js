@@ -42,33 +42,36 @@ class Grid {
   }
 
   // ================================================================================
+  // Argument is a row or a col, in either direction (a "selection"):
   update(rows) {
     // console.log('rows are....', rows);
-
     rows.forEach(row => {
       var nonZero = this.getNewArray(row);
+
       // attempting to check if anything moves:
       var numSame = 0;
+
       // Update the cell's info:
       for (var j=0; j < 4; j++) {
+        row[j].prevVal = row[j].val;
         row[j].val = nonZero[j];
 
         // check for sameness:
-        if (row[j].val == row[j].prevVal && row[j].val > 0) {
-          console.log('same');
-          numSame++;
-        }
-
-        row[j].prevVal = row[j].val;
+        // (Only matters for losing right?)
+        // if (row[j].val == row[j].prevVal && row[j].val > 0) {
+        //   console.log('same');
+        //   numSame++;
+        // }
       }
 
-    }); // end forEach(row)
+    });
   }
 
   // ================================================================================
   // The main game logic:
   getNewArray(row) {
-    console.log('row is: ', row);
+
+    row = row.reverse(); // It seems like this is the key. But then we have to reverse the inputs..
 
     var zeroCount = 0;
     var nonZero = []; // the result to be returned
@@ -79,14 +82,7 @@ class Grid {
 
     zeroCount = 4 - nonZero.length;
 
-    // for (let i=0; i < nonZero.length; i++) {
-    //   const num = nonZero[i];
-    //   const next = nonZero[i + 1]; // what if i is last?
-    //   if (num == next) {
-    //
-    //   }
-    // }
-
+    // How is this still working?!
     nonZero.forEach((num, i) => {
       if (num == nonZero[i + 1]) {
         console.log('got one');
@@ -98,7 +94,7 @@ class Grid {
     });
 
     for (var i=0; i < zeroCount; i++) {
-      nonZero.unshift(0); // add to beginning
+      nonZero.unshift(0); // add to beginning of array
     }
 
     return nonZero;
@@ -122,6 +118,7 @@ class Grid {
     // Get the proper selection:
     // I think we may need to reverse these (i.e. swap where `reverse` is applied), because we need to check from *end* of selection:
     // Either that, or change direction we walk through in the update (or, getNewArray) function.
+    // (I tried to switch the names -- didn't work, because they're tied to keys:)
     switch(direction) {
       case 'down': sel = [c1, c2, c3, c4]; break;
       case 'up': sel = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()]; break;

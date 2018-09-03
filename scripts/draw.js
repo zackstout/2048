@@ -32,10 +32,11 @@ function setup() {
 // ================================================================================
 // Arrow keys (at least on my keyboard):
 function keyReleased() {
+  // This is heinous, because we are attaching the keys to their opposite effects, but we need to because use .reverse later:
   switch(key) {
-    case '(': grid.checkRows('down'); break;
-    case '&': grid.checkRows('up'); break;
-    case "'": grid.checkRows('right'); break;
-    case '%': grid.checkRows('left'); break;
+    case '(': grid.checkRows('up'); break;
+    case '&': grid.checkRows('down'); break;
+    case "'": grid.checkRows('left'); break;
+    case '%': grid.checkRows('right'); break;
   }
 }
