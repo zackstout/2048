@@ -57,6 +57,7 @@ class Grid {
   // ================================================================================
   // The main game logic:
   getNewArray(row) {
+    console.log("row is...", row);
 
     row = row.reverse(); // It seems like this is the key. But then we have to reverse the inputs..
 
@@ -72,7 +73,6 @@ class Grid {
     // How is this still working?!
     nonZero.forEach((num, i) => {
       if (num == nonZero[i + 1]) {
-        console.log('got one');
         // set the one at i to 0, and i+1 to double:
         // Ok this *will* break it if we have more than 2 elements, because we're altering the array we're walking through:
         nonZero = [num * 2].concat(nonZero.slice(i + 2));
