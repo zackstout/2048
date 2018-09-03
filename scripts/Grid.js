@@ -19,7 +19,6 @@ class Grid {
 
   // ================================================================================
   drawGrid() {
-    // clear out before re-drawing:
     background(225);
     this.info.forEach(cell => {
       cell.drawBorders();
@@ -31,12 +30,12 @@ class Grid {
   }
 
   // ================================================================================
+  // Find an empty cell, then spawn a 2 or a 4 in it (light recursion):
   spawnNew() {
     var ran = Math.floor(Math.random() * 16);
     if (this.info[ran].val == 0) {
       this.info[ran].val = Math.random() > 0.5 ? 4 : 2;
     } else {
-      // I suspect this is the proper way to solve the problem:
       this.spawnNew();
     }
   }
@@ -44,26 +43,14 @@ class Grid {
   // ================================================================================
   // Argument is a row or a col, in either direction (a "selection"):
   update(rows) {
-    // console.log('rows are....', rows);
     rows.forEach(row => {
       var nonZero = this.getNewArray(row);
-
-      // attempting to check if anything moves:
-      var numSame = 0;
 
       // Update the cell's info:
       for (var j=0; j < 4; j++) {
         row[j].prevVal = row[j].val;
         row[j].val = nonZero[j];
-
-        // check for sameness:
-        // (Only matters for losing right?)
-        // if (row[j].val == row[j].prevVal && row[j].val > 0) {
-        //   console.log('same');
-        //   numSame++;
-        // }
       }
-
     });
   }
 
@@ -118,7 +105,7 @@ class Grid {
     // Get the proper selection:
     // I think we may need to reverse these (i.e. swap where `reverse` is applied), because we need to check from *end* of selection:
     // Either that, or change direction we walk through in the update (or, getNewArray) function.
-    // (I tried to switch the names -- didn't work, because they're tied to keys:)
+    // Solution: we use .reverse in getNewArray, and we invert the UI:
     switch(direction) {
       case 'down': sel = [c1, c2, c3, c4]; break;
       case 'up': sel = [c1.reverse(), c2.reverse(), c3.reverse(), c4.reverse()]; break;
