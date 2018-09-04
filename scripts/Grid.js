@@ -58,75 +58,37 @@ class Grid {
   // The main game logic:
   // Argument is a row or a col, in either direction (a "selection"):
   getNewArray(row) {
-    row = row.reverse(); // It seems like this is the key. But then we have to reverse the inputs..
+    // It seems like this is the key. But then we have to reverse the inputs..
+    row = row.reverse();
     // E.g. if user pushes UP, we get 4 cols, each of form [btm, x, x, top].
-    console.log("row is...", row);
+    // console.log("row is...", row);
+    let result = []; // the result to be returned
 
-    var zeroCount = 0;
-    var nonZero = [];
-    var result = []; // the result to be returned
-    row.forEach(cell => {
-      if (cell.val > 0) nonZero.push(cell.val);
-    });
-    zeroCount = 4 - nonZero.length;
+    const nonZero = row.filter(c => c.val > 0).map(c => c.val); // Array of non-zero values.
+    let zeroCount = 4 - nonZero.length;
 
-    console.log('nonzero is', nonZero);
-
-    // if (zeroCount === 3) {
-    //   result = [nonZero[0]];
-    // }
-
+    console.log('nonzeros are...', nonZero);
+    // Not working for cases like [2, 2, 2, 2]..
+    // and [16, 4, 4, 4] turned into [8, 8]!
+    // [8, 4, 4] became [4, 8]
+    // 2242 went to 0424instead of 0442 (from origin toward arrow direction)
     for (let i=0; i < nonZero.length; i++) {
       const num = nonZero[i];
-      const next = nonZero[i+1];
+      const next = nonZero[i + 1];
       if (num === next) {
         result.push(num * 2);
         zeroCount++;
+        // adding in the CRUCIAL:
+        i++;
       } else {
         result.push(num);
       }
     }
-    // How is this still working?!
-    // nonZero.forEach((num, i) => {
-    //   if (num == nonZero[i + 1]) {
-    //     // set the one at i to 0, and i+1 to double:
-    //     // Ok this *will* break it if we have more than 2 elements, because we're altering the array we're walking through:
-    //     nonZero = [num * 2].concat(nonZero.slice(i + 2));
-    //     zeroCount++;
-    //   }
-    // });
 
     for (var i=0; i < zeroCount; i++) {
       result.unshift(0); // add to beginning of array
     }
 
-    console.log(result);
-
-    // SECOND ATTEMPT:
-    // let prev = '';
-    // let res = [];
-    //
-    // for (let i=0; i < row.length; i++) {
-    //   const num = row[i].prevVal;
-    //   // console.log(row[i].prevVal);
-    //
-    //   if (num === prev) {
-    //     res.pop(); // get rid of last 0 to replace it.
-    //     res.push(num);
-    //     res.push(num * 2);
-    //   } else {
-    //     res.push(num);
-    //   }
-    //   prev = num;
-    // }
-
-    // THIRD ATTEMPT:
-    // let vals = row.map(c => c.prevVal);
-    // console.log(vals);
-
-
-
-    // return res;
     return result;
   }
 
