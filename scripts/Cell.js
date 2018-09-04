@@ -1,4 +1,6 @@
 
+const colors = ['#D3D3D3', '#7FFFD4', '#6495ED', '#008B8B', '#2F4F4F', '#483D8B', '#8B008B', '#B22222', '#F08080', '#C71585', '#FFDC00'];
+
 class Cell {
   constructor(i, j) {
     this.i = i;
@@ -11,6 +13,21 @@ class Cell {
     return Math.floor(Math.random() * x);
   }
 
+  colorBackground() {
+    var iPix = this.i * w/4;
+    var jPix = this.j * h/4;
+    // console.log(iPix, jPix);
+
+    const bin_val = this.val.toString(2);
+    // console.log(bin_val);
+    const pow_of_2 = bin_val.length - 1; // how many zeroes are in its binary representation.
+
+
+    // fill(0, 200, 0);
+    fill(colors[pow_of_2]);
+    rect(iPix, jPix, iPix + w/4, jPix + h/4);
+  }
+
   // ================================================================================
   // Only called when the game starts:
   start() {
@@ -20,7 +37,7 @@ class Cell {
     while (cell1 == cell2) {
       cell2 = this.getRandom(16);
     }
-    
+
     var val1 = Math.random() > 0.5 ? 2 : 4;
     var val2 = Math.random() > 0.5 ? 2 : 4;
 
