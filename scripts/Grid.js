@@ -11,6 +11,7 @@ class Grid {
     for (var i=0; i < 4; i++) {
       for (var j=0; j < 4; j++) {
         var cell = new Cell(i, j);
+        // cell.colorBackground();
         cell.drawBorders();
         this.info.push(cell);
       }

@@ -16,16 +16,11 @@ class Cell {
   colorBackground() {
     var iPix = this.i * w/4;
     var jPix = this.j * h/4;
-    // console.log(iPix, jPix);
 
     const bin_val = this.val.toString(2);
-    // console.log(bin_val);
     const pow_of_2 = bin_val.length - 1; // how many zeroes are in its binary representation.
-
-
-    // fill(0, 200, 0);
     fill(colors[pow_of_2]);
-    rect(iPix, jPix, iPix + w/4, jPix + h/4);
+    rect(iPix, jPix, iPix + w/4, jPix + h/4); // why does this work? It should be width and height, not end coordinates...
   }
 
   // ================================================================================
@@ -47,8 +42,15 @@ class Cell {
     var cell1_c = cell1 % 4;
     var cell2_c = cell2 % 4;
 
+    // Just going to be lazy for now and hard code the coloring:
+    fill(colors[val1 / 2]);
+    rect(cell1_r * w/4, (cell1_c) * h/4, w/4, h/4);
+    fill(colors[val2 / 2]);
+    rect(cell2_r * w/4, (cell2_c) * h/4, w/4, h/4);
+
     // Should just delegate responsibility of drawing the text of the value to each cell object:
     // Adding w/8 and subtracting h/8 to center text:
+    fill('black');
     text(val1, cell1_r * w/4 + w/8, (cell1_c + 1) * h/4 - h/8);
     text(val2, cell2_r * w/4 + w/8, (cell2_c + 1) * h/4 - h/8);
 
