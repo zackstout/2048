@@ -31,8 +31,8 @@ function setup() {
   // Trying to use CSS Grid:
   // let cont = createDiv();
   // cont.addClass('cell-container');
-  // console.log(cont);
-  //
+
+  // GREENSOCK ATTEMPT:
   for (let i=0; i < 16; i++) {
     let d = createDiv();
     d.addClass('cell');
@@ -40,15 +40,16 @@ function setup() {
 
     // Yikes, can't just use `d`:
     let x = document.getElementsByClassName('cell' + i)[0];
-    TweenLite.set(x, {x: 10 * i, y: 100}); // Add x:0 so we don't go out of screen.
 
+    const i_coord = floor(i / 4);
+    const j_coord = i % 4;
+    TweenLite.set(x, {x: 50 * i_coord, y: 50 * j_coord}); // Add x:0 so we don't go out of screen.
   }
 
   let cell1 = document.getElementsByClassName('cell1')[0];
   console.log(cell1);
   // Hmm.... We need to set position: absolute for this, but then CSS grid breaks....
-  TweenLite.to(cell1, 0.7, {right: 0}); // Add x:0 so we don't go out of screen.
-
+  TweenLite.to(cell1, 0.7, {right: '-=100px'}); // Add x:0 so we don't go out of screen.
 }
 
 // ================================================================================

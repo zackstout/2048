@@ -7,10 +7,11 @@ Building a clone of the game 2048, following the principles of Object-Oriented P
 - Each tile slides as far as it can; if it hits a tile with the same value, they merge.
 - A merged tile cannot merge with another tile in the same move.
 
-## Bugs:
-- It seems we can remove higher numbers by iterations of arrow keys: this should not be possible.
+## Animation:
+![](https://media.giphy.com/media/iDLus2m5Gj60lMJLRb/giphy.gif)
 
 ## Questions:
 - What if a row is [8, 8, 0, 0]?
   - Does the first 8 slide, and then we have [8, 0, 0, 8], and then [0, 0, 0, 16]?
   - Or does the second 8 slide, so we have [0, 16, 0, 0]?
+- Answer: I believe it's the former, because that accords with each tile sliding "as far as it can."
